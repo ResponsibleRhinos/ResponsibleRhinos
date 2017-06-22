@@ -7,7 +7,7 @@ class PinInfo extends React.Component{
   }
   render() {
     return (
-    <div className="PinInfo">
+    <div className="pinInfo">
       <div>PinInfo</div>
     </div>)
   }
