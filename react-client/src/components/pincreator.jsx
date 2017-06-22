@@ -7,7 +7,7 @@ class PinCreator extends React.Component{
   }
   render() {
     return (
-    <div className="PinCreator">
+    <div>
       <div>Possible Pins</div>
     </div>)
   }

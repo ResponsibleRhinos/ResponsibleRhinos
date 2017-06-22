@@ -7,7 +7,7 @@ class Map extends React.Component{
   }
   render() {
     return (
-    <div className="mainmap">
+    <div>
       <div>Main Map</div>
     </div>)
   }

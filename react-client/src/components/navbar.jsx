@@ -7,9 +7,9 @@ class Navbar extends React.Component{
   }
   render() {
     return (
-    <div className="NavBar">
+    <div className="navbar navbar-default">
       <button className="Newmap">NewMap</button>
-      <button className="Login">Login</button>
+      <button className="Login pull-right">Login</button>
     </div>)
   }
 }
