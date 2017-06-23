@@ -21,15 +21,15 @@
 
 ## Usage
 
-> Some usage instructions
+To launch the app:
+    1. Simply Install the dependencies
+    2. Prep the app for developement
+    3. And visit localhost:3000
 
 ## Requirements
 
 - Node 6.4.x
-- Redis 2.6.x
 - Postgresql 9.1.x
-- etc
-- etc
 
 ## Development
 
