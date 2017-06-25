@@ -21,7 +21,6 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "^2.1.2",
     "style-loader": "^0.18.2",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
@@ -30,6 +29,7 @@
   },
   "dependencies": {
     "webpack": "^2.6.1",
+    "extract-text-webpack-plugin": "^2.1.2",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
     "material-ui": "^0.18.3",
