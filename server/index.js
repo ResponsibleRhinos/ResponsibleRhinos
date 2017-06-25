@@ -11,6 +11,10 @@ app.use(express.static(process.env.PWD + '/react-client/dist'));
 //   res.send('hello world!');
 // });
 
+app.get('/', function(req, res) {
+  res.send('hello world!');
+})
+
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
 });
