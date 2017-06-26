@@ -29,7 +29,6 @@ export class MapContainer extends React.Component {
       zoom: 15,
       centerAroundCurrentLocation: true,
       currentPlace: null,
-      // currentPlacePosition: this.state.currentCenter,
       markers: [],
       markerOn: false
     };
@@ -158,14 +157,6 @@ export class MapContainer extends React.Component {
     }
     return (
       <div>
-        <Drawer
-          open={this.state.drawerIsOpen}
-          containerStyle={{marginTop: '10em', height: '25em', width: 80, opacity: 1}}
-        >
-          <PinCreator 
-            style={{opacity: 1}}
-            onPinClick={this.selectPin.bind(this)}/>
-        </Drawer>
         <AutocompleteInput
           google={this.props.google} 
           searchPlace={this.searchLocation.bind(this)}/>
@@ -185,25 +176,6 @@ export class MapContainer extends React.Component {
           <Marker position={this.state.currentPlacePosition}
             name={'Joes sandwich'}/>
         </Map>
-        <Popover
-          open={this.state.searchIsOpen}
-          anchorEl={this.state.searchAnchorEl}
-          anchorOrigin={{'horizontal': 'left', 'vertical': 'bottom'}}
-          targetOrigin={{'horizontal': 'right', 'vertical': 'bottom'}}
-          onRequestClose={this.handleRequestClose.bind(this)}
-          style={{height: 250}}
-        >
-          <Menu>
-          </Menu>
-        </Popover>
-        <FloatingSearchButton 
-          style={this.styles.searchButton}
-          mini={true}
-          onTouchTap={this.handleSearchTap.bind(this)}
-
-        >
-          <Sherlock/>
-        </FloatingSearchButton>
       </div>
     );
   }
