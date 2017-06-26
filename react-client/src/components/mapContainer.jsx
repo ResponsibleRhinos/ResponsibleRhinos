@@ -120,7 +120,7 @@ export class MapContainer extends React.Component {
 
   centerMoved(mapProps, map) {
     this.setMapStateCenter();
-    // console.log('center: ', this.state.zoom);
+    console.log('center: ', this.state.zoom);
   }
 
   handleSearchTap(event) {
