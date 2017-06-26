@@ -1,6 +1,6 @@
 # Project Name
 
-> Pithy project description
+![Alt text]https://travis-ci.org/ResponsibleRhinos/ResponsibleRhinos.svg?branch=master
 
 ## Team
 
@@ -53,7 +53,6 @@ OR
 Upon Pull Request:
 
 TravisCI(automatically)
-
 
 ### Preparing ENV for Developement
 ```
