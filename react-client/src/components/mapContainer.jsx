@@ -49,6 +49,13 @@ export class MapContainer extends React.Component {
     })
   }
 
+  handleKeyDown = (event) => {
+    console.log(event.target.value)
+    this.setState({
+      query: ''
+    })
+  } 
+
   handleRequestClose = () => {
     this.setState({
       searchIsOpen: false,
@@ -85,7 +92,9 @@ export class MapContainer extends React.Component {
         >
           <Menu>
             <MenuItem>
-              <TextField hintText="Address" />
+              <TextField
+              hintText="Address"
+              onChange={this.handleKeyDown}/>
             </MenuItem>
           </Menu>
         </Popover>
