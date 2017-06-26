@@ -5,11 +5,7 @@ import AutocompleteInput from './autocomplete.jsx';
 import {GoogleApiWrapper} from 'google-maps-react';
 import GOOGLE_API_KEY from '../google/googleAPI.js';
 import Paper from 'material-ui/Paper';
-<<<<<<< HEAD
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-=======
-import RefreshIndicator from 'material-ui/Refreshindicator';
->>>>>>> Search Sandbox
 import Drawer from 'material-ui/Drawer';
 import PinCreator from './pincreator.jsx';
 import Popover from 'material-ui/Popover';
@@ -25,7 +21,6 @@ export class MapContainer extends React.Component {
     super(props);
     this.state = {
       drawerIsOpen: true,
-<<<<<<< HEAD
       searchIsOpen: false,
       currentCenter: {
         lat: 44,
@@ -35,9 +30,6 @@ export class MapContainer extends React.Component {
       centerAroundCurrentLocation: true,
       currentPlace: null,
       currentPlacePosition: null
-=======
-      searchIsOpen: false
->>>>>>> Search Sandbox
     };
     this.styles = {
       refresh: {
@@ -53,8 +45,7 @@ export class MapContainer extends React.Component {
       },
       searchButton: {
         position: 'fixed',
-<<<<<<< HEAD
-        bottom: '5em',
+        bottom: '1em',
         right: '1em'
       }
     };
@@ -111,12 +102,7 @@ export class MapContainer extends React.Component {
   centerMoved(mapProps, map) {
     this.setMapStateCenter();
     console.log('center: ', this.state.zoom);
-=======
-        bottom: '1em',
-        right: '1em'
-      }
-    };
->>>>>>> Search Sandbox
+
   }
 
   handleSearchTap = (event) => {
@@ -153,7 +139,6 @@ export class MapContainer extends React.Component {
         >
           <PinCreator style={{opacity: 1}}/>
         </Drawer>
-<<<<<<< HEAD
         <AutocompleteInput
           google={this.props.google} 
           searchPlace={this.searchLocation.bind(this)}/>
@@ -171,30 +156,13 @@ export class MapContainer extends React.Component {
           style={{height: 250}}
         >
           <Menu>
-=======
-        <Map google={this.props.google} style={this.styles.mapFlexBox} />
-        <Popover
-          open={this.state.searchIsOpen}
-          anchorEl={this.state.searchAnchorEl}
-          anchorOrigin={{"horizontal":"left","vertical":"bottom"}}
-          targetOrigin={{"horizontal":"right","vertical":"bottom"}}
-          onRequestClose={this.handleRequestClose}
-        >
-          <Menu>
-            <MenuItem>
-              <TextField hintText="Address" />
-            </MenuItem>
->>>>>>> Search Sandbox
           </Menu>
         </Popover>
         <FloatingSearchButton 
           style={this.styles.searchButton}
           mini={true}
-<<<<<<< HEAD
           onTouchTap={this.handleSearchTap.bind(this)}
-=======
-          onTouchTap={this.handleSearchTap}
->>>>>>> Search Sandbox
+
         >
           <Sherlock/>
         </FloatingSearchButton>
