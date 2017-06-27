@@ -46,7 +46,7 @@ export default class Drawers extends Component {
           onRequestClose={this.handleClose}
           containerStyle={this.styles.drawer}
         >
-          <PinCreator close={this.handleClose} />
+          <PinCreator onPinClick={this.props.onPinClick} close={this.handleClose} />
         </Drawer>
       </div>
     );

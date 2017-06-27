@@ -176,7 +176,7 @@ export class MapContainer extends React.Component {
           <Marker position={this.state.currentPlacePosition}
             name={'Joes sandwich'}/>
         </Map>
-        <PinSelection />
+        <PinSelection onPinClick={this.selectPin.bind(this)} />
       </div>
     );
   }
