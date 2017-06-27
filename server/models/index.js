@@ -1,6 +1,12 @@
 var db = require('../db');
 
-module.exports.users = () => {
-  console.log("running query method");
-  return db.query('select * from mad_map_users');
+module.exports = {
+  users: {  
+    findOrCreate: function (username) {
+      return db.query('select * from mad_map_users');     
+    },
+    get: function () {
+      return db.query('select * from mad_map_users');   
+    }
+  }
 };
