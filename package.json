@@ -44,6 +44,7 @@
     "google-maps-react": "^1.0.19",
     "html-webpack-plugin": "^2.29.0",
     "material-ui": "^0.18.3",
+    "passport-github": "^1.1.0",
     "pg-promise": "^6.1.1",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
