@@ -2,7 +2,7 @@ require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var models = require('./models');
-//var passport = require('./authentication/passport');
+var passport = require('./authentication/passport');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -24,17 +24,17 @@ app.get('/users', function(req, res) {
   });
 });
 
-// app.get('/auth/github',
-//   passport.authenticate('github')
-// );
+app.get('/auth/github',
+  passport.authenticate('github')
+);
 
-// app.get('/auth/github/callback', 
-//   passport.authenticate('github', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   }
-// );
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
 
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
