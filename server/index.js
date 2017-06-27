@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var models = require('./models');
@@ -24,19 +25,16 @@ app.get('/users', function(req, res) {
 });
 
 app.get('/auth/github',
-  //()=>{
-    // console.log("Made to to auth"); }
   passport.authenticate('github')
-
 );
 
-app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }
-);
+// app.get('/auth/github/callback', 
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   }
+// );
 
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
