@@ -4,9 +4,7 @@ import Map from 'google-maps-react';
 import AutocompleteInput from './autocomplete.jsx';
 import {GoogleApiWrapper, Marker} from 'google-maps-react';
 import GOOGLE_API_KEY from '../google/googleAPI.js';
-import Paper from 'material-ui/Paper';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import Drawer from 'material-ui/Drawer';
 import PinCreator from './pincreator.jsx';
 import Popover from 'material-ui/Popover';
 import FloatingSearchButton from 'material-ui/FloatingActionButton';
@@ -14,6 +12,7 @@ import Sherlock from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import PinSelection from './pindrawer.jsx';
 
 export class MapContainer extends React.Component { 
 
@@ -22,6 +21,7 @@ export class MapContainer extends React.Component {
     this.state = {
       drawerIsOpen: true,
       searchIsOpen: false,
+      pin: false,
       currentCenter: {
         lat: 44,
         lng: -122
@@ -176,6 +176,7 @@ export class MapContainer extends React.Component {
           <Marker position={this.state.currentPlacePosition}
             name={'Joes sandwich'}/>
         </Map>
+        <PinSelection />
       </div>
     );
   }
