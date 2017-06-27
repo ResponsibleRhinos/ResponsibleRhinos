@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Map from 'google-maps-react';
 import AutocompleteInput from './autocomplete.jsx';
-import {GoogleApiWrapper} from 'google-maps-react';
+import {GoogleApiWrapper, Marker} from 'google-maps-react';
 import GOOGLE_API_KEY from '../google/googleAPI.js';
-import Paper from 'material-ui/Paper';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import Drawer from 'material-ui/Drawer';
 import PinCreator from './pincreator.jsx';
 import Popover from 'material-ui/Popover';
 import FloatingSearchButton from 'material-ui/FloatingActionButton';
@@ -14,6 +12,7 @@ import Sherlock from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import PinSelection from './pindrawer.jsx';
 
 export class MapContainer extends React.Component { 
 
@@ -22,6 +21,7 @@ export class MapContainer extends React.Component {
     this.state = {
       drawerIsOpen: true,
       searchIsOpen: false,
+      pin: false,
       currentCenter: {
         lat: 44,
         lng: -122
@@ -29,7 +29,8 @@ export class MapContainer extends React.Component {
       zoom: 15,
       centerAroundCurrentLocation: true,
       currentPlace: null,
-      currentPlacePosition: null
+      markers: [],
+      markerOn: false
     };
     this.styles = {
       refresh: {
@@ -90,34 +91,57 @@ export class MapContainer extends React.Component {
   }
 
   handleClick(mapProps, map, clickEvent) {
-    console.log('event: ', clickEvent);
+    // console.log('event: ', clickEvent);
+    if (this.state.markerOn) {
+      // console.log(this.props.children);
+      var markers = this.state.markers;
+      markers.push({
+        position: clickEvent.latLng
+        // icon: {
+        //   path: 
+        // }
+      });
+      this.setState({
+        markers: markers,
+        markerOn: false
+      });
+      // console.log(this.state.markers);
+    }
   }
 
   mapReady(mapProps, map) {
     window.map = map;
     this.setMapStateCenter();
-    console.log('center: ', this.state.zoom);
+    this.setState({
+      currentPlacePosition: this.state.currentCenter
+    });
+    // console.log('center: ', this.state.zoom);
   }
 
   centerMoved(mapProps, map) {
     this.setMapStateCenter();
     console.log('center: ', this.state.zoom);
-
   }
 
-  handleSearchTap = (event) => {
+  handleSearchTap(event) {
     event.preventDefault();
     this.setState({
       searchIsOpen: !this.state.searchIsOpen,
       searchAnchorEl: event.currentTarget
-    })
+    });
   }
 
-  handleRequestClose = () => {
+  handleRequestClose() {
     this.setState({
       searchIsOpen: false,
     });
-  };
+  }
+  
+  selectPin(e) {
+    this.setState({
+      markerOn: !this.state.markerOn
+    });
+  }
 
   render() {
     if (!this.props.loaded) {
@@ -133,12 +157,6 @@ export class MapContainer extends React.Component {
     }
     return (
       <div>
-        <Drawer
-          open={this.state.drawerIsOpen}
-          containerStyle={{marginTop: '10em', height: '25em', width: 80, opacity: 1}}
-        >
-          <PinCreator style={{opacity: 1}}/>
-        </Drawer>
         <AutocompleteInput
           google={this.props.google} 
           searchPlace={this.searchLocation.bind(this)}/>
@@ -146,26 +164,19 @@ export class MapContainer extends React.Component {
           onClick={this.handleClick.bind(this)}
           centerAroundCurrentLocation={this.state.centerAroundCurrentLocation}
           onReady={this.mapReady.bind(this)}
-          onDragend={this.centerMoved.bind(this)}/>
-        <Popover
-          open={this.state.searchIsOpen}
-          anchorEl={this.state.searchAnchorEl}
-          anchorOrigin={{'horizontal': 'left', 'vertical': 'bottom'}}
-          targetOrigin={{'horizontal': 'right', 'vertical': 'bottom'}}
-          onRequestClose={this.handleRequestClose.bind(this)}
-          style={{height: 250}}
-        >
-          <Menu>
-          </Menu>
-        </Popover>
-        <FloatingSearchButton 
-          style={this.styles.searchButton}
-          mini={true}
-          onTouchTap={this.handleSearchTap.bind(this)}
-
-        >
-          <Sherlock/>
-        </FloatingSearchButton>
+          onDragend={this.centerMoved.bind(this)}>
+          {this.state.markers.map((marker, index, markers) => {
+            console.log('markers: ', index, marker);
+            return (
+              <Marker
+                key={index}
+                position={marker.position}/>
+            );
+          })}
+          <Marker position={this.state.currentPlacePosition}
+            name={'Joes sandwich'}/>
+        </Map>
+        <PinSelection onPinClick={this.selectPin.bind(this)} />
       </div>
     );
   }
