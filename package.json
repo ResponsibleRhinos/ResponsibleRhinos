@@ -14,7 +14,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "eslint-pom": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
-    "heroku-postbuild": "webpack -d",
+    "heroku-postbuild": "webpack -d; psql -U postgres < server/schema.sql;",
     "start": "node server/index.js",
     "test": "mocha --compilers js:babel-core/register test/.setup.js ./test/**/*"
   },
