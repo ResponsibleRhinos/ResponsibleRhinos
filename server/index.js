@@ -43,12 +43,9 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     console.log("successful sign in");
-    //TODO Alex PLEASE LOOK,
-    //This is all coded up, but we need to figure out how to
-    //notify the browser that the user is signed in.
     console.log("The user id is", req.user);
-    // Successful authentication, redirect home.
-    res.redirect('/');
+    res.send(req.user);
+    //res.redirect('/');
   });
 
 //--Passport--

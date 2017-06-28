@@ -24,6 +24,8 @@ passport.use(new GitHubStrategy({
   callbackURL: `${process.env.HOST_URL}/auth/github/callback`
 },
   function(accessToken, refreshToken, profile, cb) {
+    console.log("The profile is:", profile);
+    //id, user_email 
     Models.users.findOrCreate(profile.id)
     .then((result)=>{
       console.log("running cb with", result[0]);
