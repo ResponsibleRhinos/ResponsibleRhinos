@@ -25,8 +25,8 @@ passport.use(new GitHubStrategy({
 },
   function(accessToken, refreshToken, profile, cb) {
     console.log("The profile is:", profile);
-    //id, user_email 
-    Models.users.findOrCreate(profile.id)
+    //id, user_email
+    Models.users.findOrCreate(profile.username)
     .then((result)=>{
       console.log("running cb with", result[0]);
       cb(null, result[0]);
