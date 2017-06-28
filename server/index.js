@@ -22,6 +22,10 @@ app.get('/users', function(req, res) {
   Models.users.get()
   .then((result)=>{
     res.end(JSON.stringify(result));
+  })
+  .catch((err)=>{
+    console.log("Loggin the error", err);
+    res.end();
   });
 });
 
