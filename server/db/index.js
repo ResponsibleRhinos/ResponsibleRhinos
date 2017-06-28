@@ -1,8 +1,7 @@
 const pgp = require('pg-promise')();
 
 const connection = {
-  host: 'localhost',
-  port: 5432,
+  host: process.env.DATABASE_URL,
   database: 'mad_map_db',
   user: 'mad_map_db',
 };
