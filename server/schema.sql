@@ -19,6 +19,7 @@ DROP TABLE if exists mad_map_users;
 CREATE TABLE mad_map_users
 (
   id SERIAL PRIMARY KEY,
+  githubId text,
   user_name text
 );
 
