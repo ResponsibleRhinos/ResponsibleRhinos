@@ -9,7 +9,7 @@ drop role if exists mad_map_db;
  *  TO DELETE:
  *  psql -U postgres < DROP DATABASE mad_map_db */
 
-create user mad_map_db createdb createuser password 'password';
+create user mad_map_db createdb createrole password 'password';
 
 create database mad_map_db owner mad_map_db;
 \connect mad_map_db
@@ -19,7 +19,6 @@ DROP TABLE if exists mad_map_users;
 CREATE TABLE mad_map_users
 (
   id SERIAL PRIMARY KEY,
-  githubId text,
   user_name text
 );
 

@@ -1,10 +1,9 @@
 require('dotenv').config();
-var GitHubStrategy = require('passport-github2').Strategy;
 
 var express = require('express');
 var bodyParser = require('body-parser');
 var Models = require('./models');
-var passport = require('passport');
+var passport = require('./authentication/passport');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -30,26 +29,8 @@ app.get('/users', function(req, res) {
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: `http://${process.env.HOST_URL}/auth/github/callback`
-},
-  function(accessToken, refreshToken, profile, cb) {
-    Models.users.findOrCreate(profile.id)
-    .then((result)=>{
-      console.log("running cb with", result);
-      cb(null, result);
-    })
-    .catch((err)=>{
-      cb(err, null);
-    });
-  }
-));
 
-
-//--Passport--
-
+//---Github Authentication--
 
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
@@ -58,9 +39,16 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     console.log("successful sign in");
+    //TODO Alex PLEASE LOOK,
+    //This is all coded up, but we need to figure out how to
+    //notify the browser that the user is signed in.
+    console.log("The user id is", req.user);
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
+//--Passport--
+
 
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
