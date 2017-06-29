@@ -26,6 +26,7 @@ class mapView extends React.Component {
     this.updateZoom = this.updateZoom.bind(this);
     this.addMarker = this.addMarker.bind(this);
     this.save = this.save.bind(this);
+    this.github = this.github.bind(this);
   }
 
   addMarker(position){
@@ -39,7 +40,16 @@ class mapView extends React.Component {
     });
   }
 
-  save () {
+  github() {
+    console.log('hello');
+    axios.get('/auth/github')
+      .then(res => {
+        console.log('github response:', res);
+      })
+      .catch(err => console.log('ERROR:', err));
+  }
+
+  save() {
     console.log('hi');
     // axios.post('/map/save', {state: 'state'})
     //   .then(res => console.log(res))
@@ -61,7 +71,7 @@ class mapView extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Header save={this.save} savecurrentUser={this.state.currentUser}/>
+          <Header save={this.save} git={this.github} savecurrentUser={this.state.currentUser}/>
           <div style={{height: '0.5em'}}>
           </div>
           <MapContainer 

@@ -24,7 +24,7 @@ class Header extends Component {
         <AppBar
           title="Map Maps"
           iconElementLeft={<Toc save={this.props.save} />}
-          iconElementRight={this.state.loggedIn ? <LoggedIn /> : <Login />}
+          iconElementRight={this.state.loggedIn ? <LoggedIn /> : <Login git={this.props.git}/>}
         />
       </div>
     );
