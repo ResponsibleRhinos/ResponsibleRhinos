@@ -28,11 +28,23 @@ class mapView extends React.Component {
     this.addMarker = this.addMarker.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      zoom: 13
+    });
+    // this.addMarker({lat: ()=>{return 44.0001},
+    //                 lng: ()=>{return -122.0024}
+    //               })
+  }
+
   addMarker(position){
-    console.log("Currently the marker list is:", this.state.markers);
+    // console.log("Current marker is:", position.toString());
+    // console.log("Current position is:", position.toJSON());
+    console.log(position.lng());
+    var pos = {lat: ()=>{ position.lat(); }, lng: ()=>{ position.lng(); } };
     var markers = this.state.markers;
     markers.push({
-      position: position
+      position: pos
     });
     this.setState({
       markers: markers
@@ -46,6 +58,7 @@ class mapView extends React.Component {
   }
 
   updateZoom(zoom) {
+    console.log("zoom is:", zoom);
     this.setState( {
       zoom: zoom
     });
@@ -61,7 +74,8 @@ class mapView extends React.Component {
                         updateCenter={this.updateCenter}
                         updateZoom={this.updateZoom}
                         markers={this.state.markers}
-                        addMarker={this.addMarker}/>
+                        addMarker={this.addMarker}
+                        zoom={this.state.zoom}/>
         </div>
       </MuiThemeProvider>
     );
