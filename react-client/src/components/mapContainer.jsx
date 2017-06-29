@@ -81,10 +81,6 @@ export class MapContainer extends React.Component {
     }
     
     this.setMapStateCenter();
-    this.setState({
-      currentPlace: place,
-      currentPlacePosition: place.geometry.location
-    });
   }
 
   handleClick(mapProps, map, clickEvent) {
@@ -99,9 +95,6 @@ export class MapContainer extends React.Component {
   mapReady(mapProps, map) {
     window.map = map;
     this.setMapStateCenter();
-    this.setState({
-      currentPlacePosition: this.state.currentCenter
-    });
   }
 
 
@@ -156,8 +149,6 @@ export class MapContainer extends React.Component {
                 position={marker.position}/>
             );
           })}
-          <Marker position={this.state.currentPlacePosition}
-            name={'Joes sandwich'}/>
         </Map>
         <PinSelection onPinClick={this.selectPin.bind(this)} />
       </div>
