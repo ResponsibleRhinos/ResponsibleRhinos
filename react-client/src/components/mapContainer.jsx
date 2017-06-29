@@ -47,20 +47,6 @@ export class MapContainer extends React.Component {
     };
   }
 
-  handleSearchTap(event) {
-    event.preventDefault();
-    this.setState({
-      searchIsOpen: !this.state.searchIsOpen,
-      searchAnchorEl: event.currentTarget
-    });
-  }
-
-  handleRequestClose() {
-    this.setState({
-      searchIsOpen: false,
-    });
-  }
-  
   centerMoved(mapProps, map) {
     this.setMapStateCenter();
   }
