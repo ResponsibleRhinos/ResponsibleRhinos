@@ -21,12 +21,7 @@ export class MapContainer extends React.Component {
     this.state = {
       drawerIsOpen: true,
       searchIsOpen: false,
-      pin: false,
-      currentCenter: {
-        lat: 44,
-        lng: -122
-      },
-      zoom: 15,
+      pin: false,   
       centerAroundCurrentLocation: true,
       currentPlace: null,
       markers: [],
@@ -65,12 +60,14 @@ export class MapContainer extends React.Component {
       searchIsOpen: false,
     });
   }
+  
+  centerMoved(mapProps, map) {
+    this.setMapStateCenter();
+  }
 
   setMapStateCenter() {
-    this.setState({
-      currentCenter: window.map.getCenter(),
-      zoom: window.map.getZoom()
-    });
+    this.props.updateCenter(window.map.getCenter());
+    this.props.updateZoom(window.map.getZoom());
   }
   
   searchLocation(place, map) {
@@ -118,10 +115,7 @@ export class MapContainer extends React.Component {
     // console.log('center: ', this.state.zoom);
   }
 
-  centerMoved(mapProps, map) {
-    this.setMapStateCenter();
-    console.log('center: ', this.state.zoom);
-  }
+
 
   handleSearchTap(event) {
     event.preventDefault();

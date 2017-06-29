@@ -15,16 +15,47 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 injectTapEventPlugin();
 
-const mapView = ({match}) => (
-  <MuiThemeProvider>
-    <div>
-      <Header />
-      <div style={{height: '0.5em'}}>
-      </div>
-      <MapContainer />
-    </div>
-  </MuiThemeProvider>
-);
+class mapView extends React.Component{
+  constructor({match}) {
+    super({match});
+    this.state = {
+      currentCenter: {
+        lat: 44,
+        lng: -122
+      },
+      zoom: 15,
+      currentUser: null
+    };
+    this.updateCenter = this.updateCenter.bind(this);
+    this.updateZoom = this.updateZoom.bind(this);
+  }
+
+  updateCenter(center) {
+    this.setState({
+      currentCenter: center
+    });
+  }
+
+  updateZoom(zoom) {
+    this.setState( {
+      zoom: zoom
+    });
+  }
+  render() {
+    return (
+      <MuiThemeProvider>
+        <div>
+          <Header currentUser={this.state.currentUser}/>
+          <div style={{height: '0.5em'}}>
+          </div>
+          <MapContainer currentCenter={this.state.currentCenter}
+                        updateCenter={this.updateCenter}
+                        updateZoom={this.updateZoom}/>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
 
 const userView = ({match}) => (
   <MuiThemeProvider>
