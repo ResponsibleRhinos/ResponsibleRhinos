@@ -67,13 +67,13 @@ describe('MapContainer', () => {
       );
       expect(wrapper.containsMatchingElement(<div></div>)).to.equal(true);
     });
-    // it('map renders correctly and adds to our html', () => {
-    //   const wrapper = mount(
-    //     <div>
-    //       <Map google={null}/>
-    //     </div>
-    //   );
-    //   expect(wrapper.find('Map').length).to.equal(1);
-    // });
+    it('map renders correctly and adds to our html', () => {
+      const wrapper = mount(
+        <div>
+          <Map google={null}/>
+        </div>
+      );
+      expect(wrapper.find('Map').length).to.equal(1);
+    });
   });
 });
