@@ -29,7 +29,7 @@ class mapView extends React.Component {
   }
 
   addMarker(position){
-    console.log("About to add the following position", position);
+    console.log("Currently the marker list is:", this.state.markers);
     var markers = this.state.markers;
     markers.push({
       position: position

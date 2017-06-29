@@ -142,7 +142,6 @@ export class MapContainer extends React.Component {
           onReady={this.mapReady.bind(this)}
           onDragend={this.centerMoved.bind(this)}>
           {this.props.markers.map((marker, index, markers) => {
-            console.log('markers: ', index, marker);
             return (
               <Marker
                 key={index}
