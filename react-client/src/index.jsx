@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import axios from 'axios';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './components/header.jsx'; 
 import MapContainer from './components/mapContainer.jsx';
 import UserPage from './components/userpage.jsx';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
-// import axios from 'axios';
 
 injectTapEventPlugin();
 
@@ -26,6 +25,7 @@ class mapView extends React.Component {
     this.updateCenter = this.updateCenter.bind(this);
     this.updateZoom = this.updateZoom.bind(this);
     this.addMarker = this.addMarker.bind(this);
+    this.save = this.save.bind(this);
   }
 
   addMarker(position){
@@ -37,6 +37,13 @@ class mapView extends React.Component {
     this.setState({
       markers: markers
     });
+  }
+
+  save () {
+    console.log('hi');
+    // axios.post('/map/save', {state: 'state'})
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err));
   }
 
   updateCenter(center) {
@@ -54,14 +61,16 @@ class mapView extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Header currentUser={this.state.currentUser}/>
+          <Header save={this.save} savecurrentUser={this.state.currentUser}/>
           <div style={{height: '0.5em'}}>
           </div>
-          <MapContainer currentCenter={this.state.currentCenter}
-                        updateCenter={this.updateCenter}
-                        updateZoom={this.updateZoom}
-                        markers={this.state.markers}
-                        addMarker={this.addMarker}/>
+          <MapContainer 
+            currentCenter={this.state.currentCenter}
+            updateCenter={this.updateCenter}
+            updateZoom={this.updateZoom}
+            markers={this.state.markers}
+            addMarker={this.addMarker}
+          />
         </div>
       </MuiThemeProvider>
     );
