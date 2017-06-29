@@ -16,8 +16,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 injectTapEventPlugin();
 
 class mapView extends React.Component {
-  constructor({match}) {
-    super({match});
+  constructor(props) {
+    super(props);
     this.state = {
       currentCenter: {
         lat: 44,
