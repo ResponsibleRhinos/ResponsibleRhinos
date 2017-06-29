@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 injectTapEventPlugin();
 
-class mapView extends React.Component{
+class mapView extends React.Component {
   constructor({match}) {
     super({match});
     this.state = {
@@ -24,10 +24,23 @@ class mapView extends React.Component{
         lng: -122
       },
       zoom: 15,
-      currentUser: null
+      currentUser: null,
+      markers:[]
     };
     this.updateCenter = this.updateCenter.bind(this);
     this.updateZoom = this.updateZoom.bind(this);
+    this.addMarker = this.addMarker.bind(this);
+  }
+
+  addMarker(position){
+    console.log("About to add the following position", position);
+    var markers = this.state.markers;
+    markers.push({
+      position: position
+    });
+    this.setState({
+      markers: markers
+    });
   }
 
   updateCenter(center) {
@@ -50,7 +63,9 @@ class mapView extends React.Component{
           </div>
           <MapContainer currentCenter={this.state.currentCenter}
                         updateCenter={this.updateCenter}
-                        updateZoom={this.updateZoom}/>
+                        updateZoom={this.updateZoom}
+                        markers={this.state.markers}
+                        addMarker={this.addMarker}/>
         </div>
       </MuiThemeProvider>
     );

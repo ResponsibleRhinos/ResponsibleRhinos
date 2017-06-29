@@ -88,21 +88,11 @@ export class MapContainer extends React.Component {
   }
 
   handleClick(mapProps, map, clickEvent) {
-    // console.log('event: ', clickEvent);
     if (this.state.markerOn) {
-      // console.log(this.props.children);
-      var markers = this.state.markers;
-      markers.push({
-        position: clickEvent.latLng
-        // icon: {
-        //   path: 
-        // }
-      });
+      this.props.addMarker(clickEvent.latLng);         
       this.setState({
-        markers: markers,
         markerOn: false
       });
-      // console.log(this.state.markers);
     }
   }
 
@@ -112,7 +102,6 @@ export class MapContainer extends React.Component {
     this.setState({
       currentPlacePosition: this.state.currentCenter
     });
-    // console.log('center: ', this.state.zoom);
   }
 
 
@@ -159,7 +148,7 @@ export class MapContainer extends React.Component {
           centerAroundCurrentLocation={this.state.centerAroundCurrentLocation}
           onReady={this.mapReady.bind(this)}
           onDragend={this.centerMoved.bind(this)}>
-          {this.state.markers.map((marker, index, markers) => {
+          {this.props.markers.map((marker, index, markers) => {
             console.log('markers: ', index, marker);
             return (
               <Marker
