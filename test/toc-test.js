@@ -10,46 +10,46 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 //react component
-import Header from '../react-client/src/components/header.jsx';
-import LoggedIn from '../react-client/src/components/loggedin.jsx';
-import Login from '../react-client/src/components/login.jsx';
 import Toc from '../react-client/src/components/toc.jsx';
 //material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 import TocIcon from 'material-ui/svg-icons/action/toc';
-import FileCloudUpload from 'material-ui/svg-icons/file/cloud-upload';
+import SaveIcon from 'material-ui/svg-icons/file/cloud-upload';
+import CreateIcon from 'material-ui/svg-icons/content/create';
+import {grey50} from 'material-ui/styles/colors';
 
-describe('Header', () => {
+describe('Toc', () => {
   describe('mounting type tests', () => {
     it('renders correctly', () => {
-      const wrapper = shallow(<Header />);
+      const wrapper = shallow(<Toc />);
       assert.isOk(wrapper);
     });
     it('mounts onto DOM', () => {
-      const wrapper = mount((
-        <MuiThemeProvider>
-          <Header />
-        </MuiThemeProvider>
-      ));
-      expect(wrapper.contains(<Header />)).to.equal(true);
-    });
-    it('mounting adds AppBar to our html', () => {
-      expect(mount(
-        <MuiThemeProvider>
-        <Header />
-        </MuiThemeProvider>
-      ).find('AppBar').length).to.equal(1);
-    });
-    it('calls render when mounting', () => {
-      spy(Header.prototype, 'render');
       const wrapper = mount(
         <MuiThemeProvider>
-          <Header />
+          <Toc />
         </MuiThemeProvider>
       );
-      expect(Header.prototype.render.calledOnce).to.equal(true);
+      expect(wrapper.contains(
+        <Toc />
+      )).to.equal(true);
+    });
+    it('should be an Icon Menu', () => {
+      expect(shallow(<Toc />).is('IconMenu')).to.equal(true);
+    });
+    it('mounting adds to our html', () => {
+      expect(mount(
+        <MuiThemeProvider>
+          <Toc />
+        </MuiThemeProvider>
+      ).find('IconMenu').length).to.equal(1);
+    });
+    it('IconMenu should have MenuItems', () => {
+      const wrapper = shallow(<Toc />);
+      assert.isOk(wrapper.find('MenuItem').length);
     });
   });
 });

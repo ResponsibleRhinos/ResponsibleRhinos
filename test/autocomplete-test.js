@@ -9,7 +9,6 @@ import { mount, shallow, render } from 'enzyme';
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 //react component
 import Autocomplete from '../react-client/src/components/autocomplete.jsx';
 //material-ui

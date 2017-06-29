@@ -9,7 +9,6 @@ import { mount, shallow, render } from 'enzyme';
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 //react components
 import Autocomplete from '../react-client/src/components/autocomplete.jsx';
 import PinInfo from '../react-client/src/components/pininfo.jsx';
@@ -17,7 +16,6 @@ import Login from '../react-client/src/components/login.jsx';
 //material-ui
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-injectTapEventPlugin(); //touchTap functionality
 
 describe('BasicValidations', () => {
   describe('chai', () => {

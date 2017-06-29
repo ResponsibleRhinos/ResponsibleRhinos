@@ -1,3 +1,4 @@
+import injectTapEventPlugin from 'react-tap-event-plugin';
 const { JSDOM } = require('jsdom');
 
 const jsdom = new JSDOM(`<!DOCTYPE html>
@@ -25,3 +26,4 @@ global.navigator = {
   userAgent: 'node.js',
 };
 copyProps(window, global);
+injectTapEventPlugin(); //touchTap functionality

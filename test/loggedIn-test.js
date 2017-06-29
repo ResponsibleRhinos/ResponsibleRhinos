@@ -9,7 +9,6 @@ import { mount, shallow, render } from 'enzyme';
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 //react component
 import LoggedIn from '../react-client/src/components/loggedin.jsx';
 //material-ui
@@ -27,46 +26,28 @@ describe('LoggedIn', () => {
       assert.isOk(wrapper);
     });
     it('mounts onto DOM', () => {
-      const wrapper = mount((
+      const wrapper = mount(
         <MuiThemeProvider>
-        <LoggedIn />
+          <LoggedIn />
         </MuiThemeProvider>
-      ));
+      );
       expect(wrapper.contains(
-        <MuiThemeProvider>
         <LoggedIn />
-        </MuiThemeProvider>
       )).to.equal(true);
     });
-    it('should be a div container with AppBar', () => {
-      expect(shallow(<LoggedIn />).is('div')).to.equal(true);
+    it('should be an Icon Menu', () => {
+      expect(shallow(<LoggedIn />).is('IconMenu')).to.equal(true);
     });
     it('mounting adds to our html', () => {
       expect(mount(
         <MuiThemeProvider>
-        <LoggedIn />
+          <LoggedIn />
         </MuiThemeProvider>
-      ).find('AppBar').length).to.equal(1);
+      ).find('IconMenu').length).to.equal(1);
     });
-    it('calls render when mounting', () => {
-      spy(Header.prototype, 'render');
-      const wrapper = mount(
-        <MuiThemeProvider>
-        <LoggedIn />
-        </MuiThemeProvider>
-      );
-      expect(Header.prototype.render.calledOnce).to.equal(true);
+    it('IconMenu should have MenuItems', () => {
+      const wrapper = shallow(<LoggedIn />);
+      assert.isOk(wrapper.find('MenuItem').length);
     });
-    // it('calls render when mounting', () => {
-    //   spy(Header.prototype, 'render');
-    //   const wrapper = mount(<Header />);
-    //   expect(Header.prototype.render.calledOnce).to.equal(true);
-    // });
-    // it('calls componentDidUpdate on property change', () => {
-    //   spy(Header.prototype, 'componentDidUpdate');
-    //   const wrapper = mount(<Header searchPlace={'something'}/>);
-    //   wrapper.setProps({ searchPlace: 'changed location'});
-    //   expect(Header.prototype.componentDidUpdate.calledOnce).to.equal(true);
-    // });
   });
 });
