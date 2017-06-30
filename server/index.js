@@ -2,6 +2,7 @@ require('dotenv').config();
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var Promise = require('bluebird');
 var Models = require('./models');
 var passport = require('./authentication/passport');
 var morgan = require('morgan');
@@ -31,14 +32,28 @@ app.get('/users', function(req, res) {
 
 app.post('/map', function(req, res) {
   console.log("got to the post for map");
-  console.log(req.body);
-  Models.maps.create(req.body)
+  req.body.state.currentCenter = `${req.body.state.currentCenter.lat}/${req.body.state.currentCenter.lng}`;
+  console.log(req.body.state);
+  var mapId = null; 
+  Models.maps.create(req.body.state)
   .then((result)=>{
-    console.log("Result form Maps.create:",result);
-    //need to grab the Id from the result for the URI
-    //Promise.map(on all the markers)
-    //then at then end we need to have res.end
-    res.send(4); //TODO: Send back the MapId
+    mapId = result[0]["currval"];
+    console.log("what are wer running map on:", req.body.state.markers);
+    return Promise.map(req.body.state.markers, (marker)=>{
+      var mark = {
+        'lat': marker.position.lat,
+        'lng': marker.position.lng,
+        'mapId': mapId,
+        'info': '',
+        'icon': ''
+      };
+      console.log("mark is: ", mark);
+      return Models.markers.create(mark);
+    })
+    .then((result)=>{
+      console.log("results from marker create", result);
+      res.end(map_id);
+    });
   })
   .catch((err)=>{
     console.log("There was an error:", err);

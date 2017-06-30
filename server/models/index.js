@@ -24,10 +24,14 @@ module.exports = {
   },
   maps: {
     create: function ({userId, zoom, currentCenter}) {
+      if(!userId) {
+        userId = null;
+      }
       return db.query(
         `INSERT INTO mad_map_maps
-            (user_id, zoom, current_center)
-         VALUES (${userId}, ${zoom}, ${currentCenter})'`);
+            (zoom, current_center, user_id)
+         VALUES (${zoom}, '${currentCenter}', ${userId});
+         SELECT currval('mad_map_maps_id_seq');`);
     },
     get: function (mapId) {
       return db.query('select * from mad_map_maps where id=${mapId}');   
@@ -43,18 +47,22 @@ module.exports = {
     }
   },
   markers: {
-    create: function ({markerId, lat, lng, icon}) {
+    create: function ({mapId, lat, lng, icon, info}) {
+      console.log("lng:", lng);
+
       return db.query(
-        `INSERT INTO mad_map_maps
-            (map_id, lat, lng, icon)
-         VALUES (${markerId}, ${lat}, ${lng}, ${icon})'`);
+        `INSERT INTO mad_map_markers
+            (lat, lng, icon, info, map_id)
+         VALUES (${lat}, ${lng}, ${icon}, ${info}, ${mapId},);`);
     },
+    //INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
+
     get: function (markerId) {
-      return db.query('select * from mad_map_maps where id=${markerId}');   
+      return db.query('select * from mad_map_markers where id=${markerId}');   
     },
     update: function ({markerId, lat, lng, icon}) {
       return db.query(
-        `UPDATE mad_map_apps
+        `UPDATE mad_map_markers
         SET lat = ${lat},
          lng = ${lng},
          icon = ${icon}

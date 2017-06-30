@@ -75,9 +75,10 @@ class mapView extends React.Component {
     let marks = this.serializeMarkers(this.state.markers);
     let state = this.state;
     state.markers = marks;
-    axios.post('/map/save', {state: state})
+    axios.post('/map', {state: state})
       .then(res => {
-        this.replaceURL(res.data.id);
+        console.log(res);
+        //this.replaceURL(res.data.id);
       })
       .catch(err => console.log(err));
   }
