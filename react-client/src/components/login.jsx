@@ -10,14 +10,19 @@ import {lightBlack} from 'material-ui/styles/colors'
 
 class Login extends Component {
   static muiName = 'FlatButton';
-  
-  state = {
-    open: false,
-    username: '',
-    password: ''
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      open: false,
+      username: '',
+      password: ''
+    };
+    this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
+  }
 
-  handleTouchTap = (event) => {
+
+  handleTouchTap(event) {
     event.preventDefault();
     this.setState({
       open: true,
@@ -25,7 +30,7 @@ class Login extends Component {
     });
   };
 
-  handleRequestClose = () => {
+  handleRequestClose() {
     this.setState({
       open: false,
     });
@@ -53,7 +58,7 @@ class Login extends Component {
               <FlatButton label="Login" primary={true} />
               <FlatButton label="Sign Up" secondary={true} />
               <FlatButton
-                href="/auth/github"
+                onTouchTap={this.props.git}
                 target="_blank"
                 color={lightBlack}
                 icon={<GitHub />}
