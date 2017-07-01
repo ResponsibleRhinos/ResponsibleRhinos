@@ -44,16 +44,16 @@ app.post('/map', function(req, res) {
       var mark = {
         'lat': marker.position.lat,
         'lng': marker.position.lng,
-        'mapId': mapId + 0,
-        'info': '',
-        'icon': Math.random() * 10
+        'mapId': 2,
+        'info': mapId,
+        'icon': Math.floor(Math.random() * 10)
       };
       console.log("the mark is:", mark);
       return Models.markers.create(mark);
     })
     .then((result)=>{
       console.log("results from marker create", result);
-      res.end(map_id);
+      res.end(mapId);
     });
   })
   .catch((err)=>{
