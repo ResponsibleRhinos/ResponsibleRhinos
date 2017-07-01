@@ -50,12 +50,12 @@ ALTER TABLE mad_map_markers OWNER TO mad_map_db;
 INSERT INTO mad_map_users (user_name) VALUES ('billy_bob69');
 INSERT INTO mad_map_users (user_name) VALUES ('hammy_pig1337');
 INSERT INTO mad_map_users (user_name) VALUES ('cool-bill9000');
-INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (17, 44/-122, 1);
-INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (15, 49/-110, 2);
-INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (14, 51/-115, 3);
-INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
-INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (42, -118, 3,'random string describing pin', 2);
-INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (40, -108, 3,'random string thats working', 3);
+-- INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (17, 44/-122, 1);
+-- INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (15, 49/-110, 2);
+-- INSERT INTO mad_map_maps (zoom, current_center, user_id) VALUES (14, 51/-115, 3);
+-- INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
+-- INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (42, -118, 3,'random string describing pin', 2);
+-- INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (40, -108, 3,'random string thats working', 3);
 
 -- * FOR Heroku DEPLOYMENT
 

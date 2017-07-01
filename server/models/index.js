@@ -48,17 +48,15 @@ module.exports = {
   },
   markers: {
     create: function ({mapId, lat, lng, icon, info}) {
-      console.log("lng:", lng);
-
       return db.query(
         `INSERT INTO mad_map_markers
             (lat, lng, icon, info, map_id)
-         VALUES (${lat}, ${lng}, ${icon}, ${info}, ${mapId},);`);
+         VALUES (${lat}, ${lng}, ${icon}, ${info}, ${mapId});`);
     },
     //INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
 
     get: function (markerId) {
-      return db.query('select * from mad_map_markers where id=${markerId}');   
+      return db.query('select * from mad_map_markers where id=${markerId};');   
     },
     update: function ({markerId, lat, lng, icon}) {
       return db.query(

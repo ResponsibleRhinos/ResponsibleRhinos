@@ -32,22 +32,23 @@ app.get('/users', function(req, res) {
 
 app.post('/map', function(req, res) {
   console.log("got to the post for map");
-  req.body.state.currentCenter = `${req.body.state.currentCenter.lat}/${req.body.state.currentCenter.lng}`;
-  console.log(req.body.state);
+  var state = JSON.parse(req.body.state);
+  state.currentCenter = `${state.currentCenter.lat}/${state.currentCenter.lng}`;
+  console.log(state);
   var mapId = null; 
-  Models.maps.create(req.body.state)
+  Models.maps.create(state)
   .then((result)=>{
     mapId = result[0]["currval"];
-    console.log("what are wer running map on:", req.body.state.markers);
-    return Promise.map(req.body.state.markers, (marker)=>{
+    console.log("markers are:", state.markers);
+    return Promise.map(state.markers, (marker)=>{
       var mark = {
         'lat': marker.position.lat,
         'lng': marker.position.lng,
-        'mapId': mapId,
+        'mapId': mapId + 0,
         'info': '',
-        'icon': ''
+        'icon': Math.random() * 10
       };
-      console.log("mark is: ", mark);
+      console.log("the mark is:", mark);
       return Models.markers.create(mark);
     })
     .then((result)=>{
@@ -57,7 +58,6 @@ app.post('/map', function(req, res) {
   })
   .catch((err)=>{
     console.log("There was an error:", err);
-    console.log("I didnt add the app or any markers");
     res.end();
   });
 });
@@ -71,7 +71,6 @@ app.get('/map/:mapId', function(req, res) {
   })
   .catch((err)=>{
     console.log("There was an error:", err);
-    console.log("Not able to get the map requested.");
     res.end();
   });
 });
