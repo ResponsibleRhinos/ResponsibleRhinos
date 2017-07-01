@@ -34,7 +34,7 @@ module.exports = {
          SELECT currval('mad_map_maps_id_seq');`);
     },
     get: function (mapId) {
-      return db.query('select * from mad_map_maps where id=${mapId}');   
+      return db.query(`select * from mad_map_maps where id=${mapId}`);   
     },
     update: function ({mapId, userId, zoom, currentCenter}) {
       return db.query(
@@ -54,9 +54,11 @@ module.exports = {
          VALUES (${lat}, ${lng}, ${icon}, ${mapId});`);
     },
     //INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
-
+    getbyMapId: function(mapId){
+      return db.query(`select * from mad_map_markers where map_id=${mapId};`);   
+    },
     get: function (markerId) {
-      return db.query('select * from mad_map_markers where id=${markerId};');   
+      return db.query(`select * from mad_map_markers where id=${markerId};`);   
     },
     update: function ({markerId, lat, lng, icon}) {
       return db.query(

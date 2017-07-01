@@ -86,8 +86,9 @@ class mapView extends React.Component {
     console.log("About to run a get request for the state");
     axios.get(`/map/${id}`)
       .then(res => {
-        res.data.markers = this.serializeMarkers(res.data.markers);
+        // res.data.markers = this.serializeMarkers(res.data.markers);
         console.log('go go ');
+        console.log("got the data:", res.data);
         this.setState(res.data);
       })
       .catch(err => console.log('get error:', err));
