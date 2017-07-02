@@ -15,8 +15,8 @@ class mapView extends React.Component {
     super(props);
     this.state = {
       currentCenter: {
-        lat: 44,
-        lng: -122
+        lat: 37.774929,
+        lng: -122.41941600000001
       },
       zoom: 15,
       currentUser: null,
