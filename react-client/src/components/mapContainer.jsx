@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Map from 'google-maps-react';
 import AutocompleteInput from './autocomplete.jsx';
 import {GoogleApiWrapper, Marker} from 'google-maps-react';
-import GOOGLE_API_KEY from '../google/googleAPI.js';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import PinCreator from './pincreator.jsx';
 import Popover from 'material-ui/Popover';
@@ -142,5 +141,5 @@ export class MapContainer extends React.Component {
 
 
 export default GoogleApiWrapper({
-  apiKey: GOOGLE_API_KEY
+  apiKey: process.env.GOOGLE_API_KEY
 })(MapContainer);
