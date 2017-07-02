@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './components/header.jsx'; 
 import MapContainer from './components/mapContainer.jsx';
 import UserPage from './components/userpage.jsx';
+import PinInfo from './components/pininfo.jsx';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 injectTapEventPlugin();
@@ -133,6 +134,7 @@ class mapView extends React.Component {
             addMarker={this.addMarker}
             zoom={this.state.zoom}
           />
+          <PinInfo />
         </div>
       </MuiThemeProvider>
     );
