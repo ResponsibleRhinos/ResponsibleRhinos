@@ -95,16 +95,16 @@ app.get('/map/:mapId', (req, res) => {
 
 app.put('/map/:mapId', (req, res) => {
   console.log(req.body);
-  Models.maps.update()
-    .then((result) => {
-      console.log('Result form Maps.create:', result);
-      res.end();
-    })
-    .catch((err) => {
-      console.log('There was an error:", err');
-      console.log('I didnt add the app or any markers');
-      res.end();
-    });
+  Models.maps.update(req.params.mapId)
+  .then((result)=>{
+    console.log("Result form Maps.create:",result);
+    res.end();
+  })
+  .catch((err)=>{
+    console.log("There was an error:", err);
+    console.log("I didnt add the app or any markers");
+    res.end();
+  });
 });
 
 
