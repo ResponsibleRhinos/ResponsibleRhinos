@@ -76,6 +76,7 @@ app.post('/map', (req, res) => {
       })
         .then((result) => {
           console.log('results from marker create', result);
+          console.log('mapId: ', mapId);
           res.end(mapId);
         });
     })

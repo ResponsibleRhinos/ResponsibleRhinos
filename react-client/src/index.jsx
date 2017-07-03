@@ -98,9 +98,9 @@ class mapView extends React.Component {
       .then(res => {
         console.log(res);
         this.setState({
-          mapId: res.data.mapId
+          mapId: res.data
         });
-        this.replaceURL(res.data.mapId);
+        this.replaceURL(res.data);
       })
       .catch(err => console.log(err));
   }

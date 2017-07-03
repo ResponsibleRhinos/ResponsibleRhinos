@@ -55,10 +55,10 @@ module.exports = {
           var marker = {
             'position': {'lat': result['lat'], 'lng': result['lng']},
             'icon': {
-              'path': result['iconPath'],
+              'path': result['icon_path'],
               'fillOpacity': 1.0,
-              'fillColor': result['fillColor'],
-              'strokeColor': result['strokeColor'],
+              'fillColor': result['fill_color'],
+              'strokeColor': result['stroke_color'],
               'strokeOpacity': 0.0,
               'anchor': {
                 x: 10,
@@ -86,11 +86,11 @@ module.exports = {
     }
   },
   markers: {
-    create: function ({lat, lng, icon, info, mapId}) {
+    create: function ({lat, lng, iconPath, fillColor, strokeColor, info, mapId}) {
       return db.query(
         `INSERT INTO mad_map_markers
-            (lat, lng, icon, map_id)
-         VALUES (${lat}, ${lng}, ${icon}, ${mapId});`);
+            (lat, lng, icon_path, fill_color, stroke_color, map_id)
+         VALUES (${lat}, ${lng}, '${iconPath}', '${fillColor}', '${strokeColor}', ${mapId});`);
     },
     //INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
     getbyMapId: function(mapId) {
