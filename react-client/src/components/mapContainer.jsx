@@ -10,6 +10,7 @@ import FloatingSearchButton from 'material-ui/FloatingActionButton';
 import Sherlock from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
 import Menu from 'material-ui/Menu';
+import GOOGLE_API_KEY from '../google/google.js';
 import MenuItem from 'material-ui/MenuItem';
 import PinSelection from './pindrawer.jsx';
 
@@ -153,6 +154,9 @@ export class MapContainer extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: window.GOOGLE_API_KEY
-})(MapContainer);
+
+
+export default MapContainer;
+// export default GoogleApiWrapper({
+//   apiKey: window.GOOGLE_API_KEY
+// })(MapContainer);
