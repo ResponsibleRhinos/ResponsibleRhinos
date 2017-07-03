@@ -14,17 +14,27 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
+      username: 'AlexanderPoet'
     };
   }
+
+  // componentWillRecieveProps(nextProps) {
+  //   if (nextProps.currentUser !== this.state.currentUser) {
+  //     console.log('hi from header');
+  //     this.setState({
+  //       username: props.currentUser
+  //     });
+  //   }
+  // }
   
   render() {
+    console.log('header render,', this.props);
     return (
       <div>
         <AppBar
           title="Map Maps"
           iconElementLeft={<Toc save={this.props.save} />}
-          iconElementRight={this.state.loggedIn ? <LoggedIn /> : <Login git={this.props.git}/>}
+          iconElementRight={this.props.currentUser ? <LoggedIn /> : <Login git={this.props.git}/>}
         />
       </div>
     );
