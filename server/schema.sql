@@ -38,8 +38,10 @@ CREATE TABLE mad_map_markers
   id SERIAL PRIMARY KEY,
   lat double precision,
   lng double precision,
-  icon int,
+  iconPath text,
   info text,
+  fillColor text,
+  strokeColor text,
   map_id int REFERENCES mad_map_maps (id)
 );
 

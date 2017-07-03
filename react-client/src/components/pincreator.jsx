@@ -12,7 +12,7 @@ import Bar from 'material-ui/svg-icons/maps/local-bar';
 import Pizza from 'material-ui/svg-icons/maps/local-pizza';
 import Train from 'material-ui/svg-icons/maps/train';
 import Mall from 'material-ui/svg-icons/maps/local-mall';
-import Grocery from 'material-ui/svg-icons/maps/local-grocery-store'; 
+import Grocery from 'material-ui/svg-icons/maps/local-grocery-store';
 import {cyan500} from 'material-ui/styles/colors';
 import randomColorPicker from './randomcolor.js';
 
@@ -92,7 +92,10 @@ class PinCreator extends Component {
       fillColor: styles.fill,
       strokeColor: styles.color,
       strokeOpacity: 0,
-      anchor: new window.google.maps.Point(10, 10)
+      anchor: {
+        x: 10,
+        y: 10
+      }
     };
     return pinAttributes;
   }
@@ -112,7 +115,7 @@ class PinCreator extends Component {
       <div style={styles.root}>
         <GridList
           cellHeight={24}
-          style={styles.gridList} 
+          style={styles.gridList}
         >
           {tiles.map((tile, index) => {
             return (

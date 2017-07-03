@@ -2,7 +2,7 @@ var db = require('../db');
 var Promise = require('bluebird');
 
 module.exports = {
-  users: {  
+  users: {
     findOrCreate: function (githubId) {
       return db.query(
         `INSERT INTO mad_map_users
@@ -12,15 +12,15 @@ module.exports = {
             NOT EXISTS (
                 SELECT user_name FROM mad_map_users WHERE user_name = '${githubId}'
             );
-          SELECT * 
-          FROM mad_map_users 
+          SELECT *
+          FROM mad_map_users
           WHERE user_name='${githubId}'`);
     },
     get: function () {
-      return db.query('select * from mad_map_users');   
+      return db.query('select * from mad_map_users');
     },
     findById: function (id) {
-      return db.query(`select * from mad_map_users where id='${id}'`);   
+      return db.query(`select * from mad_map_users where id='${id}'`);
     }
   },
   maps: {
@@ -54,7 +54,17 @@ module.exports = {
         return Promise.map(results, result => {
           var marker = {
             'position': {'lat': result['lat'], 'lng': result['lng']},
-            'icon': result['icon'],
+            'icon': {
+              'path': result['iconPath'],
+              'fillOpacity': 1.0,
+              'fillColor': result['fillColor'],
+              'strokeColor': result['strokeColor'],
+              'strokeOpacity': 0.0,
+              'anchor': {
+                x: 10,
+                y: 10
+              }
+            },
             'info': result['info']
           };
           state.markers.push(marker);
@@ -62,7 +72,7 @@ module.exports = {
         .then((result)=>{
           return Promise.resolve(state);
         });
-        
+
       });
     },
     update: function ({mapId, userId, zoom, currentCenter}) {
@@ -72,7 +82,7 @@ module.exports = {
          zoom = ${zoom},
          current_center = ${currentCenter}
         WHERE
-         id = ${mapId};`);   
+         id = ${mapId};`);
     }
   },
   markers: {
@@ -84,10 +94,10 @@ module.exports = {
     },
     //INSERT INTO mad_map_markers (lat, lng, icon, info, map_id) VALUES (50, -129, 3,'some info about our pin', 1);
     getbyMapId: function(mapId) {
-      return db.query(`select * from mad_map_markers where map_id=${mapId};`);   
+      return db.query(`select * from mad_map_markers where map_id=${mapId};`);
     },
     get: function (markerId) {
-      return db.query(`select * from mad_map_markers where id=${markerId};`);   
+      return db.query(`select * from mad_map_markers where id=${markerId};`);
     },
     update: function ({markerId, lat, lng, icon}) {
       return db.query(
@@ -96,19 +106,7 @@ module.exports = {
          lng = ${lng},
          icon = ${icon}
         WHERE
-         id = ${markerId};`);   
+         id = ${markerId};`);
     }
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
