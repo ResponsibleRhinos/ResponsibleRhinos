@@ -6,6 +6,19 @@ export class Autocomplete extends React.Component {
 
   constructor(props) {
     super(props);
+    this.styles = {
+      root: {
+        fontSize: 16,
+        lineHeight: '24px',
+        width: props.fullWidth ? '100%' : 256,
+        display: 'inline-block',
+        position: 'relative',
+        border: 'none',
+        cursor: props.disabled ? 'not-allowed' : 'auto',
+        marginLeft: '35%',
+        marginBottom: '1%'
+      }
+    };
   }
   
   componentDidUpdate(prevProps) {
@@ -36,15 +49,13 @@ export class Autocomplete extends React.Component {
     });
   }
   
-  // textChange(event) {
-  //   console.log(event.target.value);
-  // }
-  
   render() {
     return (
       <input
         type="text" 
-        ref="autocomplete"/>
+        ref="autocomplete"
+        style={this.styles.root}
+      />
     );
   }
 }
