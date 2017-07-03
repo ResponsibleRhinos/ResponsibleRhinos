@@ -22,9 +22,12 @@ export class MapContainer extends React.Component {
       searchIsOpen: false,
       pin: false,   
       centerAroundCurrentLocation: true,
-      currentPlace: null,
+      currentPlace: {},
       markers: [],
       markerOn: false,
+      // zoom: props.zoom,
+      // currentCenter: props.currentCenter
+      currentIcon: {}
     };
     this.styles = {
       refresh: {
@@ -65,7 +68,19 @@ export class MapContainer extends React.Component {
 
   handleClick(mapProps, map, clickEvent) {
     if (this.state.markerOn) {
-      this.props.addMarker(clickEvent.latLng);         
+      // this.props.addMarker(clickEvent.latLng);         
+      console.log("The lat long is:",clickEvent.latLng);
+      // this.props.addMarker(clickEvent.latLng);         
+      var marker = {
+        position: clickEvent.latLng,
+        icon: this.state.currentIcon
+      }
+      this.props.addMarker(marker);         
+      // var markers = this.state.markers;
+      // markers.push({
+      //   position: clickEvent.latLng,
+      //   icon: this.state.currentIcon
+      // });
       this.setState({
         markerOn: false
       });
@@ -92,9 +107,10 @@ export class MapContainer extends React.Component {
     });
   }
   
-  selectPin(e) {
+  selectPin(pin) {
     this.setState({
-      markerOn: !this.state.markerOn
+      markerOn: !this.state.markerOn,
+      currentIcon: pin
     });
   }
 
@@ -126,7 +142,8 @@ export class MapContainer extends React.Component {
             return (
               <Marker
                 key={index}
-                position={marker.position}/>
+                position={marker.position}
+                icon={marker.icon}/>
             );
           })}
         </Map>

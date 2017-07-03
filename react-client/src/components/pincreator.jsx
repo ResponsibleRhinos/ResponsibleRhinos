@@ -55,10 +55,56 @@ class PinCreator extends Component {
 
   handle(e) {
     e.preventDefault();
-    this.props.onPinClick(e);
+    this.props.onPinClick(this.getPinAttributes(e.target));
     this.props.close();
-    console.log('123', e.target);
+    console.log('123', this.getPinAttributes(e.target));
+    console.log('4: ', e.target.tagName);
+    console.log('pin: ', e.target);
+  }
 
+  getPinAttributes(node) {
+    if (node.tagName === 'svg') {
+      return this.getAttributesFromSvg(node);
+    } else if (node.tagName === 'path') {
+      return this.getAttributesFromPath(node);
+    }
+  }
+
+  getAttributesFromSvg(node) {
+    console.log('hey:', this.parsePinStyle(node));
+    var styles = this.parsePinStyle(node);
+    var pinAttributes = {
+      path: node.firstChild.getAttribute('d'),
+      fillOpacity: 1.0,
+      fillColor: styles.fill,
+      strokeColor: styles.color,
+      strokeOpacity: 0.0,
+      anchor: new window.google.maps.Point(10, 10)
+    };
+    return pinAttributes;
+  }
+
+  getAttributesFromPath(node) {
+    var styles = this.parsePinStyle(node.parentNode);
+    var pinAttributes = {
+      path: node.getAttribute('d'),
+      fillOpacity: 1.0,
+      fillColor: styles.fill,
+      strokeColor: styles.color,
+      strokeOpacity: 0,
+      anchor: new window.google.maps.Point(10, 10)
+    };
+    return pinAttributes;
+  }
+
+  parsePinStyle(node) {
+    var stylesArray = node.getAttribute('style').split('; ');
+    var styles = {};
+    stylesArray.forEach((style, index, stylesArray) => {
+      var currentStyle = style.split(': ');
+      styles[currentStyle[0]] = currentStyle[1];
+    });
+    return styles;
   }
 
   render() {
