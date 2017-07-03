@@ -80,6 +80,9 @@ export class MapContainer extends React.Component {
     this.props.updateCenter(this.props.currentCenter);
     map.setZoom(this.props.zoom);
     map.setCenter(this.props.currentCenter);
+    map.addListener('zoom_changed', ()=>{
+      this.props.updateZoom(map.getZoom());
+    });
   }
 
   handleSearchTap(event) {
