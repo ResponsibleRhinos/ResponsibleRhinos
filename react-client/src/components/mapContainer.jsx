@@ -143,11 +143,14 @@ export class MapContainer extends React.Component {
               <Marker
                 key={index}
                 position={marker.position}
-                icon={marker.icon}/>
+                icon={marker.icon}
+              />
             );
           })}
         </Map>
-        <PinSelection onPinClick={this.selectPin.bind(this)} />
+        <PinSelection
+          onPinClick={this.selectPin.bind(this)}
+        />
       </div>
     );
   }
