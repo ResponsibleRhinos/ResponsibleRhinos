@@ -91,6 +91,7 @@ export class MapContainer extends React.Component {
     window.map = map;
     this.props.updateCenter(window.map.getCenter());
     map.setZoom(this.props.zoom);
+    map.setCenter(this.props.currentCenter);
   }
 
   handleSearchTap(event) {
@@ -134,7 +135,7 @@ export class MapContainer extends React.Component {
         />
         <Map google={this.props.google} style={this.styles.mapFlexBox}
           onClick={this.handleClick.bind(this)}
-          centerAroundCurrentLocation={this.state.centerAroundCurrentLocation}
+          center={this.props.currentCenter}
           onReady={this.mapReady.bind(this)}
           onDragend={this.centerMoved.bind(this)}
         >
