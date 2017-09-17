@@ -67,7 +67,7 @@ describe('PinCreator', () => {
           <PinCreator />
         </MuiThemeProvider>
       );
-      wrapper.find('PinCreator').node.handle = handleTouchTap;
+      wrapper.find('PinCreator').node.handleSelect = handleTouchTap;
       wrapper.update();
       ReactTestUtils.Simulate.touchTap(ReactDOM.findDOMNode(wrapper.find('GridTile').node));
       expect(handleTouchTap.calledOnce).to.equal(true);
