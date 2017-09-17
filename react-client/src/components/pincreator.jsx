@@ -50,16 +50,13 @@ const tiles = [
 class PinCreator extends Component {
   constructor(props) {
     super(props);
-    this.handle = this.handle.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  handle(e) {
+  handleSelect(e) {
     e.preventDefault();
     this.props.onPinClick(this.getPinAttributes(e.target));
     this.props.close();
-    console.log('123', this.getPinAttributes(e.target));
-    console.log('4: ', e.target.tagName);
-    console.log('pin: ', e.target);
   }
 
   getPinAttributes(node) {
@@ -70,34 +67,28 @@ class PinCreator extends Component {
     }
   }
 
-  getAttributesFromSvg(node) {
-    console.log('hey:', this.parsePinStyle(node));
-    var styles = this.parsePinStyle(node);
-    var pinAttributes = {
-      path: node.firstChild.getAttribute('d'),
+  getGeneralAttributes(node, styles) {
+    return {
       fillOpacity: 1.0,
       fillColor: styles.fill,
       strokeColor: styles.color,
       strokeOpacity: 0.0,
       anchor: new window.google.maps.Point(10, 10)
-    };
-    return pinAttributes;
+    }
+  }
+
+  getAttributesFromSvg(node) {
+    var styles = this.parsePinStyle(node);
+    return Object.assign(this.getGeneralAttributes(node, styles), {
+      path: node.firstChild.getAttribute('d'),
+    });
   }
 
   getAttributesFromPath(node) {
     var styles = this.parsePinStyle(node.parentNode);
-    var pinAttributes = {
+    return Object.assign(this.getGeneralAttributes(node, styles), {
       path: node.getAttribute('d'),
-      fillOpacity: 1.0,
-      fillColor: styles.fill,
-      strokeColor: styles.color,
-      strokeOpacity: 0,
-      anchor: {
-        x: 10,
-        y: 10
-      }
-    };
-    return pinAttributes;
+    });
   }
 
   parsePinStyle(node) {
@@ -119,7 +110,7 @@ class PinCreator extends Component {
         >
           {tiles.map((tile, index) => {
             return (
-              <GridTile key={index} onTouchTap={(e) => this.handle(e)} >
+              <GridTile key={index} onTouchTap={(e) => this.handleSelect(e)} >
                 {tile}
               </GridTile>
             );
